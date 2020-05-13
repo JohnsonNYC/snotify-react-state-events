@@ -1,16 +1,28 @@
 import React from 'react';
 
-const SongItem = props => {
-    return (
-        <tr>
-            <td>{props.title}</td>
-            <td>{props.artist}</td>
-            <td><button onClick={null /* Put your click handler here */}>Play Now</button></td>
-            <td><button onClick={null /* Put your click handler here */}>Add to Queue</button></td>
-            <td onClick={null /* Put your click handler here */}>{props.favorite ? "💚" : "♡"}</td>
-            <td>Likes: 0</td>
-        </tr>
-    )
+class SongItem extends React.Component {
+    state = {
+        Likes: 0
+    }
+
+    handleLike=()=>{
+        this.setState({
+            Likes: this.state.Likes + 1
+        })
+    }
+
+    render() {
+        return (
+            <tr>
+                <td>{this.props.title}</td>
+                <td>{this.props.artist}</td>
+                <td><button onClick={null}>Play Now</button></td>
+                <td><button onClick={null /* Put your click handler here */}>Add to Queue</button></td>
+                <td onClick={()=>this.props.toggleFavorite(this.props.id,!this.props.favorite)}>{this.props.favorite ? "💚" : "♡"}</td>
+                <td onClick={this.handleLike}>Likes:{this.state.Likes}</td>
+            </tr>
+        )
+    }
 }
 
 export default SongItem;
